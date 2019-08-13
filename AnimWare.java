@@ -84,8 +84,14 @@ public class AnimWare {
       }	  
 	  else if (e.getSource() == Item_1_4) {
         System.out.println("Exportation");
+		int j;
+		for( j = 0; j <  100; j++){
+			drawArea[j].saver(j);
+			System.out.println("j = " + j);
+			
+		}
       }	 
-  }
+    }
   };
   
   
@@ -131,7 +137,7 @@ public class AnimWare {
    menu_2.add(couleur_3);
    
    //timeline creation
-    timeline.setMaximum(100);
+    timeline.setMaximum(100 - 1);
     timeline.setMinimum(0);
     timeline.setValue(0);
     timeline.setPaintTicks(true);
@@ -173,7 +179,7 @@ public class AnimWare {
   frame.add(timeline, BorderLayout.SOUTH);
   
 
-    frame.setSize(600, 600);
+    frame.setSize(960, 540 + 50);
     // fermeture de la JFrame
     frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     // rendre le tout visible 
