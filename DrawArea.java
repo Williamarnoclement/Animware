@@ -26,6 +26,7 @@ public class DrawArea extends JComponent {
  
   // Image in which we're going to draw
   private Image image;
+  public BufferedImage img = new BufferedImage(960, 540, BufferedImage.TYPE_INT_ARGB);
   // Graphics2D object ==> used to draw on
   private Graphics2D g2;
   // Mouse coordinates
@@ -60,11 +61,13 @@ public class DrawArea extends JComponent {
       }
     });
   }
- 
+  @Override
   protected void paintComponent(Graphics g) {
     if (image == null) {
       // image to draw null ==> we create
+
       image = createImage(960, 540);
+	  
       g2 = (Graphics2D) image.getGraphics();
       // enable antialiasing
       g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
@@ -73,6 +76,8 @@ public class DrawArea extends JComponent {
     }
  
     g.drawImage(image, 0, 0, null);
+	img = (BufferedImage) image;
+
   }
  
   // now we create exposed methods
@@ -106,8 +111,8 @@ public class DrawArea extends JComponent {
   }
 
   public void saver(int wac) {
-	BufferedImage img;
-	img = (BufferedImage) image;
+	
+	
     File file = new File("rendered/" + wac + ".png");
     
 	
@@ -118,6 +123,9 @@ public class DrawArea extends JComponent {
 		}
 		catch(IOException e) {
 		  System.out.println("nope");
+		}
+		catch(NullPointerException  npe){
+		  	System.out.println("npe");
 		}
 
 	return;
