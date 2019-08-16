@@ -8,6 +8,9 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionAdapter;
  
+import java.awt.event.MouseWheelEvent;
+import java.awt.event.MouseWheelListener;
+
 import javax.swing.JComponent;
 
 //JAVA.IO
@@ -16,6 +19,7 @@ import java.io.File;
 import java.io.IOException;
  
 import javax.imageio.ImageIO;
+import javax.swing.SwingUtilities;
  
 /**
 *
@@ -31,35 +35,47 @@ public class DrawArea extends JComponent {
   private Graphics2D g2;
   // Mouse coordinates
   private int currentX, currentY, oldX, oldY;
-  
+  public float zoom = 1f;
+  	
+	//draggable system... oui je parle anglais !
+	private int drag_x = getDragX();
+	private int drag_y = getDragX();	
+
  
   public DrawArea() {
 
     addMouseListener(new MouseAdapter() {
       public void mousePressed(MouseEvent e) {
+
         // save coord x,y when mouse is pressed
-        oldX = e.getX();
-        oldY = e.getY();
+        oldX = e.getX() - getDragX();
+        oldY = e.getY() - getDragY();
+
       }
     });
- 
+	addMouseMotionListener(new MouseMotionHandler());
     addMouseMotionListener(new MouseMotionAdapter() {
       public void mouseDragged(MouseEvent e) {
         // coord x,y when drag mouse
-        currentX = e.getX();
-        currentY = e.getY();
+        currentX = e.getX() - getDragX();
+        currentY = e.getY() - getDragY();
  
         if (g2 != null) {
           // draw line if g2 context not null
+		  if (SwingUtilities.isLeftMouseButton(e)){
           g2.drawLine(oldX, oldY, currentX, currentY);
+		  }
           // refresh draw area to repaint
           repaint();
           // store current coords x,y as olds x,y
           oldX = currentX;
           oldY = currentY;
         }
+
       }
     });
+	
+	
   }
   @Override
   protected void paintComponent(Graphics g) {
@@ -67,7 +83,7 @@ public class DrawArea extends JComponent {
       // image to draw null ==> we create
 
       image = createImage(960, 540);
-	  
+	  image.getScaledInstance(960/2, 540/2, Image.SCALE_DEFAULT);
       g2 = (Graphics2D) image.getGraphics();
       // enable antialiasing
       g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
@@ -75,7 +91,7 @@ public class DrawArea extends JComponent {
 	  clear();
     }
  
-    g.drawImage(image, 0, 0, null);
+    g.drawImage(image, getDragX(), getDragY(), null);
 	img = (BufferedImage) image;
 
   }
@@ -130,5 +146,31 @@ public class DrawArea extends JComponent {
 
 	return;
   }
- 
+  
+  public int getDragX() { 
+    return drag_x; 
+  } 
+  public int getDragY() { 
+    return drag_y; 
+  } 
+  public void setDragX(int drag_x){
+    this.drag_x = drag_x;
+  }
+  public void setDragY(int drag_y){
+    this.drag_y = drag_y;
+  } 
+  
+
+  class MouseMotionHandler extends MouseMotionAdapter {
+    public void mouseDragged(MouseEvent e) {
+		
+	if (SwingUtilities.isMiddleMouseButton(e)){
+	  System.out.println("X = " + getDragX() + " Y = "  + getDragY());
+      setDragX(e.getX());
+      setDragY(e.getY());
+      repaint();
+	}
+    }
+  }
 }
+ 

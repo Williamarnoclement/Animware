@@ -31,10 +31,9 @@ public class AnimWare {
 	
 	
 	
-	
 	DrawArea drawArea[] = new DrawArea[100];
 	
-	
+
 	
 	
 	JMenuBar menuBar = new JMenuBar();
@@ -109,12 +108,11 @@ public class AnimWare {
     content.setLayout(new BorderLayout());
     
 	// creation de l'environnement de dessin
-	
 	for (int i =  0 ; i < 100 ; i++) {  
     drawArea[i] = new DrawArea();
 	}
     
-	//boll[0] = new ResultList();
+
 	
 	// initialitation de drawarea
 	
@@ -152,6 +150,8 @@ public class AnimWare {
 			content.remove(drawArea[currentFrame]);		
 			newFrame = ((JSlider) ce.getSource()).getValue();
             System.out.println("Frame actuelle : " + newFrame);
+				drawArea[newFrame].setDragX(drawArea[currentFrame].getDragX());
+				drawArea[newFrame].setDragY(drawArea[currentFrame].getDragY());			
 			content.add(drawArea[newFrame]);
 			currentFrame = newFrame;
 			content.revalidate();
@@ -185,6 +185,8 @@ public class AnimWare {
     // rendre le tout visible 
     frame.setVisible(true);
  
-  }
  
+ 
+  }
+
 }
