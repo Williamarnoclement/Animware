@@ -25,7 +25,7 @@ public class AWModel  {
    
     ButtonGroup couleurs = new ButtonGroup();
 	
-	AWListener awlistener = new AWListener() ;
+	
    
     JRadioButton couleur_1 = new JRadioButton("Noir");
     JRadioButton couleur_2 = new JRadioButton("Bleu");
@@ -48,9 +48,11 @@ public class AWModel  {
 		menu_1.add(Item_1_2);
 		//Item_1_2.addActionListener(actionListener);
 		menu_1.add(Item_1_3);
-		Item_1_3.addActionListener(awlistener);
+		AWSaver awsaver = new AWSaver();
+		Item_1_3.addActionListener(awsaver);
+		AWExport awexport = new AWExport();
 		menu_1.add(Item_1_4);
-		//Item_1_4.addActionListener(actionListener);
+		Item_1_4.addActionListener(awexport);
 		
 		menuBar.add(menu_1);
 		menuBar.add(menu_2);

@@ -29,10 +29,10 @@ import javax.swing.SwingUtilities;
 public class AWPaint extends JComponent {
  
   // Image in which we're going to draw
-  private Image image;
+  public Image image;
   public BufferedImage img = new BufferedImage(960, 540, BufferedImage.TYPE_INT_ARGB);
   // Graphics2D object ==> used to draw on
-  private Graphics2D g2;
+  public Graphics2D g2;
   // Mouse coordinates
   //private int currentX, currentY, oldX, oldY;
   public float zoom = 1f;
@@ -40,21 +40,21 @@ public class AWPaint extends JComponent {
 	//draggable system... oui je parle anglais !
 	//private int drag_x = getDragX();
 	//private int drag_y = getDragX();	
-	private int currentX, currentY, oldX, oldY;
+	public int currentX, currentY, oldX, oldY;
 	//draggable system... oui je parle anglais !
-	private int drag_x = getDragX();
-	private int drag_y = getDragX();
+	public int drag_x = getDragX();
+	public int drag_y = getDragX();
  
   public AWPaint() {
 
-	  
+	//AWBrush awbrush = new AWBrush();
+	//this.addMouseListener(new AWBrush());
 
   }
   @Override
   protected void paintComponent(Graphics g) {
     if (image == null) {
       // image to draw null ==> we create
-
       image = createImage(960, 540);
 	  image.getScaledInstance(960/2, 540/2, Image.SCALE_DEFAULT);
       g2 = (Graphics2D) image.getGraphics();
@@ -62,6 +62,8 @@ public class AWPaint extends JComponent {
       g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
       // clear draw area
 	  clear();
+	  addMouseListener(new AWBrush());
+	  addMouseMotionListener(new AWMotionBrush());
     }
  
     g.drawImage(image,0 /**getDragX()*/,0 /**getDragY()*/, null);
@@ -99,26 +101,7 @@ public class AWPaint extends JComponent {
     g2.setPaint(Color.blue);
   }
 
-  public void saver(int wac) {
-	
-	
-    File file = new File("rendered/" + wac + ".png");
-    
-	
-		try {
-		  ImageIO.write(img, "png", file);
-		  System.out.println(wac);
-		  
-		}
-		catch(IOException e) {
-		  System.out.println("nope");
-		}
-		catch(NullPointerException  npe){
-		  	System.out.println("npe");
-		}
 
-	return;
-  }
   
     public int getDragX() { 
     return drag_x; 
