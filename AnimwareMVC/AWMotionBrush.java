@@ -10,27 +10,38 @@ import java.awt.event.MouseMotionAdapter;
 import javax.swing.SwingUtilities;
 import javax.imageio.ImageIO;
 
-public class AWMotionBrush extends AWPaint implements MouseMotionListener {
+public class AWMotionBrush implements MouseMotionListener {
 
-	private int oldX, oldY;
-	@Override
+	public int oldX, oldY, currentX, currentY;
+	private Graphics2D theg2;
+	private int theX, theY;
+	private AWPaint theawpaint;
+	
+
+	public AWMotionBrush(Graphics2D aspire_g2, int myX, int myY, AWPaint awpaint){
+		theg2 = aspire_g2;
+		theX = myX;
+		theY = myY;
+		theawpaint = awpaint;
+	}
+	
 	public void mouseDragged(MouseEvent e) {
         // coord x,y when drag mouse
-        currentX = e.getX() - getDragX();
-        currentY = e.getY() - getDragY();
- 
+        currentX = e.getX() - theX;
+        currentY = e.getY() - theY;		
         
           // draw line if g2 context not null
-		  if (g2 != null) {
+		  if (theg2 != null) {
 		  if (SwingUtilities.isLeftMouseButton(e)){
-          g2.drawLine(oldX, oldY, currentX, currentY);
+          theg2.drawLine(oldX, oldY, currentX, currentY);
 		  System.out.println(currentX);
 		  System.out.println(currentY);
 
-		  }
+		  } 
+
 		  System.out.println("left click");
           // refresh draw area to repaint
-          repaint();
+          theawpaint.repaint();
           // store current coords x,y as olds x,y
           oldX = currentX;
           oldY = currentY;
