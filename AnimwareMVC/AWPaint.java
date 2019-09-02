@@ -62,7 +62,7 @@ public class AWPaint extends JComponent {
       g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
       // clear draw area
 	  clear();
-	  addMouseListener(new AWBrush(getDragX(), getDragY()));
+	  //addMouseListener(new AWBrush(getDragX(), getDragY()));
 	  addMouseMotionListener(new AWMotionBrush(g2, getDragX(), getDragY(), this));
     }
 	

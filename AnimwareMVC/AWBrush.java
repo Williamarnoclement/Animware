@@ -39,12 +39,12 @@ public class AWBrush implements MouseListener {
 		
 	}
 	@Override
-    public void mouseReleased(MouseEvent e){
+  
+	public void mouseReleased(MouseEvent e){
 
-	System.out.println("souris relachée");
-	oldX = e.getX();
-	oldY = e.getY();
 	}
+	
+
 	@Override
     public void mouseClicked(MouseEvent e){
 		

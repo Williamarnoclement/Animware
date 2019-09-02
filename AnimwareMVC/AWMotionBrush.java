@@ -23,6 +23,8 @@ public class AWMotionBrush implements MouseMotionListener {
 		theX = myX;
 		theY = myY;
 		theawpaint = awpaint;
+		
+		//new AWBrush(myX, myY);
 	}
 	
 	public void mouseDragged(MouseEvent e) {
@@ -36,8 +38,8 @@ public class AWMotionBrush implements MouseMotionListener {
           theg2.drawLine(oldX, oldY, currentX, currentY);
 		  System.out.println(currentX);
 		  System.out.println(currentY);
-
-		  } 
+		  new AWBrush(theX, theY);
+		  }
 
 		  System.out.println("left click");
           // refresh draw area to repaint
@@ -50,7 +52,14 @@ public class AWMotionBrush implements MouseMotionListener {
       }
 	  
 	  @Override
-	  public void mouseMoved(MouseEvent e) {}  
+	  public void mouseMoved(MouseEvent e) {
+		  
+		oldX = e.getX();
+		oldY = e.getY();
+		  
+	  }  
+	  
+
 
 }
  
