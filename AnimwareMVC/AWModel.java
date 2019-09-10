@@ -9,6 +9,7 @@ import javax.swing.JSlider;
 
 import java.awt.Container;
 import java.awt.BorderLayout;
+import javax.swing.event.*;
 
 public class AWModel  {
 	
@@ -59,6 +60,11 @@ public class AWModel  {
 		menuBar.add(menu_3);
 		
 		AWPaint painter = new AWPaint();
+
+		//Implementation de la timeline !!
+		AWTimeline wac_timeline = new AWTimeline();
+
+		timeline.addChangeListener(ChangeListener(wac_timeline));
 		
 		content.add(painter, BorderLayout.CENTER);
 		
