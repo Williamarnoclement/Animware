@@ -25,7 +25,9 @@ public class AWModel  {
    
    
     ButtonGroup couleurs = new ButtonGroup();
-	
+
+
+	AWPaint painter[] = new AWPaint[100];
 	
    
     JRadioButton couleur_1 = new JRadioButton("Noir");
@@ -34,6 +36,10 @@ public class AWModel  {
 	
 	//timeline
 	JSlider timeline = new JSlider();
+
+	int currentFrame = 0;
+	int newFrame;
+	int i = 0;
 	
 	public AWModel() {
 	 
@@ -59,14 +65,18 @@ public class AWModel  {
 		menuBar.add(menu_2);
 		menuBar.add(menu_3);
 		
-		AWPaint painter = new AWPaint();
+		//AWPaint painter = new AWPaint();
+		//
+		for (int i =  0 ; i < 100 ; i++) {  
+    	painter[i] = new AWPaint();
+		}
 
 		//Implementation de la timeline !!
 		AWTimeline wac_timeline = new AWTimeline();
 
-		timeline.addChangeListener(ChangeListener(wac_timeline));
+		timeline.addChangeListener(wac_timeline);
 		
-		content.add(painter, BorderLayout.CENTER);
+		content.add(painter[currentFrame], BorderLayout.CENTER);
 		
 		
 		//timeline creation
