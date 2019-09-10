@@ -25,7 +25,7 @@ public class AWTimeline implements ChangeListener {
 
     public void stateChanged(ChangeEvent ce) 
     {	
-    	System.out.println("Timeline fonctionnelle");
+    	System.out.println("Timeline fonctionnelle" + ((JSlider) ce.getSource()).getValue());
 
     		//my_content.remove(awpaint);		
 			//newFrame = ((JSlider) ce.getSource()).getValue();
@@ -37,6 +37,7 @@ public class AWTimeline implements ChangeListener {
 			my_content.repaint();
 
 			**/
+			AWSwitchFrame(((JSlider) ce.getSource()).getValue());
     }
 }
  

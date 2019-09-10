@@ -28,6 +28,7 @@ public class AWModel  {
 
 
 	AWPaint painter[] = new AWPaint[100];
+	public Container content;
 	
    
     JRadioButton couleur_1 = new JRadioButton("Noir");
@@ -45,7 +46,7 @@ public class AWModel  {
 	 
 		// creation de la fenetre 
 		JFrame frame = new JFrame("Animation Software");
-		Container content = frame.getContentPane();
+		content = frame.getContentPane();
 		
 		// on insere le container "content" dans le jFrame
 		content.setLayout(new BorderLayout());
@@ -104,5 +105,19 @@ public class AWModel  {
  
  
 	 
+	}
+
+	public void AWSwitchFrame(int mynewframe){
+			
+			content.remove(painter[currentFrame]);		
+			newFrame = mynewframe;
+            System.out.println("Frame actuelle : " + newFrame);
+				//painter[newFrame].setDragX(painter[currentFrame].getDragX());
+				//painter[newFrame].setDragY(painter[currentFrame].getDragY());			
+			content.add(painter[newFrame]);
+			currentFrame = newFrame;
+			content.revalidate();
+			content.repaint();
+
 	}
  }
