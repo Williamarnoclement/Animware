@@ -15,10 +15,11 @@ import javax.swing.JSlider;
 public class AWTimeline implements ChangeListener {
 
 
+	private AWModel current_model;
 
-	public AWTimeline() 
+	public AWTimeline(AWModel awmodel) 
 	{
-
+		current_model = awmodel;
 	}	
 
 	
@@ -37,7 +38,9 @@ public class AWTimeline implements ChangeListener {
 			my_content.repaint();
 
 			**/
-			AWSwitchFrame(((JSlider) ce.getSource()).getValue());
+			int wac_timeline_value = ((JSlider) ce.getSource()).getValue();
+			//System.out.println(wac_timeline_value);
+			current_model.AWSwitchFrame(wac_timeline_value);
     }
 }
  
