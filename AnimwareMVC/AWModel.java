@@ -73,7 +73,8 @@ public class AWModel  {
 		}
 
 		//Implementation de la timeline !!
-		AWTimeline wac_timeline = new AWTimeline(this);
+		AWTimeline wac_timeline = new AWTimeline(thisclear);
+		//Implementation du workspace
 
 		timeline.addChangeListener(wac_timeline);
 		
