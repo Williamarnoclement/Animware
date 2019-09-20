@@ -50,6 +50,10 @@ public class AWPaint extends JComponent {
 	//AWBrush awbrush = new AWBrush();
 	//this.addMouseListener(new AWBrush());
 
+
+    //implementation du movingworkspace !
+    AWMovingWorkspace wac_workspace = new AWMovingWorkspace(this);
+
   }
   @Override
   protected void paintComponent(Graphics g) {

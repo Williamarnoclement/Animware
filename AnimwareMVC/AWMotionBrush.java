@@ -41,7 +41,7 @@ public class AWMotionBrush implements MouseMotionListener {
 		  new AWBrush(theX, theY);
 		  }
 
-		  System.out.println("left click");
+		  //System.out.println("left click");
           // refresh draw area to repaint
           theawpaint.repaint();
           // store current coords x,y as olds x,y
