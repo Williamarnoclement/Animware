@@ -33,22 +33,18 @@ public class AWPaint extends JComponent {
   public BufferedImage img = new BufferedImage(960, 540, BufferedImage.TYPE_INT_ARGB);
   // Graphics2D object ==> used to draw on
   public Graphics2D g2;
-  // Mouse coordinates
-  //private int currentX, currentY, oldX, oldY;
+
   public float zoom = 1f;
   	
 	//draggable system... oui je parle anglais !
-	//private int drag_x = getDragX();
-	//private int drag_y = getDragX();	
+
 	public int currentX, currentY, oldX, oldY;
-	//draggable system... oui je parle anglais !
+
 	public int drag_x = getDragX();
 	public int drag_y = getDragX();
  
   public AWPaint() {
 
-	//AWBrush awbrush = new AWBrush();
-	//this.addMouseListener(new AWBrush());
 
 
     //implementation du movingworkspace !
@@ -71,7 +67,7 @@ public class AWPaint extends JComponent {
 	  addMouseMotionListener(new AWMotionBrush(g2, getDragX(), getDragY(), this));
     }
 	
-    g.drawImage(image,0 /**getDragX()*/,0 /**getDragY()*/, null);
+    g.drawImage(image,getDragX(),getDragY(), null);
 	img = (BufferedImage) image;
 
   }
@@ -120,19 +116,6 @@ public class AWPaint extends JComponent {
     public void setDragY(int drag_y){
     this.drag_y = drag_y;
     } 
-/**
-  class MouseMotionHandler extends MouseMotionAdapter {
-    public void mouseDragged(MouseEvent e) {
-		
-	if (SwingUtilities.isMiddleMouseButton(e)){
-	  System.out.println("X = " + getDragX() + " Y = "  + getDragY());
-      setDragX(e.getX());
-      setDragY(e.getY());
-      repaint();
-	}
-    }
-  }
-  
-  */
+
 }
  

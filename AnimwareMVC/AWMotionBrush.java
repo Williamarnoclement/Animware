@@ -29,15 +29,15 @@ public class AWMotionBrush implements MouseMotionListener {
 	
 	public void mouseDragged(MouseEvent e) {
         // coord x,y when drag mouse
-        currentX = e.getX() - theX;
-        currentY = e.getY() - theY;		
+        currentX = e.getX() ;
+        currentY = e.getY() ;		
         
           // draw line if g2 context not null
 		  if (theg2 != null) {
 		  if (SwingUtilities.isLeftMouseButton(e)){
-          theg2.drawLine(oldX, oldY, currentX, currentY);
-		  System.out.println(currentX);
-		  System.out.println(currentY);
+          theg2.drawLine(oldX - theX, oldY - theY, currentX - theX, currentY - theY);
+		  //System.out.println(currentX);
+		  //System.out.println(currentY);
 		  new AWBrush(theX, theY);
 		  }
 

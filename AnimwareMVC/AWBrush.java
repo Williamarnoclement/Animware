@@ -26,8 +26,8 @@ public class AWBrush implements MouseListener {
     public void mousePressed(MouseEvent e) {
 		System.out.println("clicked");
         // save coord x,y when mouse is pressed
-        oldX = e.getX() - theX;
-        oldY = e.getY() - theY;
+        oldX = e.getX();
+        oldY = e.getY();
 
     }
 	@Override

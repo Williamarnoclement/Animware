@@ -29,8 +29,9 @@ public class AWMovingWorkspace extends MouseMotionAdapter {
 	      setDragX(e.getX());
 	      setDragY(e.getY());
 	      **/
-	      System.out.println("Test");
-	      
+	      System.out.println("X = " + e.getX() + " Y = " + e.getY() );
+	      current_painter.setDragX(e.getX());
+		  current_painter.setDragY(e.getY());
 	      current_painter.repaint();
 		}
     }

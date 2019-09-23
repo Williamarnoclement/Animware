@@ -113,8 +113,8 @@ public class AWModel  {
 			content.remove(painter[currentFrame]);		
 			newFrame = mynewframe;
             System.out.println("Frame actuelle : " + newFrame);
-				//painter[newFrame].setDragX(painter[currentFrame].getDragX());
-				//painter[newFrame].setDragY(painter[currentFrame].getDragY());			
+			painter[newFrame].setDragX(painter[currentFrame].getDragX());
+			painter[newFrame].setDragY(painter[currentFrame].getDragY());			
 			content.add(painter[newFrame]);
 			currentFrame = newFrame;
 			content.revalidate();
