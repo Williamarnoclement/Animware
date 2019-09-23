@@ -53,6 +53,7 @@ public class AWPaint extends JComponent {
 
     //implementation du movingworkspace !
     AWMovingWorkspace wac_workspace = new AWMovingWorkspace(this);
+    addMouseMotionListener(wac_workspace);
 
   }
   @Override

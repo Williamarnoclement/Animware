@@ -19,7 +19,6 @@ public class AWMovingWorkspace extends MouseMotionAdapter {
 	public AWMovingWorkspace(AWPaint awpainter) {
 
 		current_painter = awpainter;
-		mouseDragged();
 
 	}	
 
@@ -32,7 +31,7 @@ public class AWMovingWorkspace extends MouseMotionAdapter {
 	      **/
 	      System.out.println("Test");
 	      
-	      repaint();
+	      current_painter.repaint();
 		}
     }
 
