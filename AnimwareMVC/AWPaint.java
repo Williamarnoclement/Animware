@@ -41,7 +41,7 @@ public class AWPaint extends JComponent {
 	public int currentX, currentY, oldX, oldY;
 
 	public int drag_x = getDragX();
-	public int drag_y = getDragX();
+	public int drag_y = getDragY();
  
   public AWPaint() {
 
@@ -68,7 +68,7 @@ public class AWPaint extends JComponent {
     }
 	
     g.drawImage(image,getDragX(),getDragY(), null);
-	img = (BufferedImage) image;
+	  img = (BufferedImage) image;
 
   }
  
