@@ -29,8 +29,10 @@ public class AWMotionBrush implements MouseMotionListener, MouseListener{
 	public void mouseDragged(MouseEvent e) {
         // coord x,y when drag mouse
         currentX = e.getX();
-        currentY = e.getY();	
-
+        currentY = e.getY();
+		
+		oldX = e.getX() - theX;
+		oldY = e.getY() - theY;
 
 		theX = theawpaint.getDragX();
 		theY = theawpaint.getDragY();
@@ -41,7 +43,7 @@ public class AWMotionBrush implements MouseMotionListener, MouseListener{
 		  	if ((currentX > theX) && (currentX < (960 + theX)) && (currentY > theY) && (currentY < (540 + theY))){
 
 		  	    //dans l'image
-		  	    System.out.println("Dedans ! (x="+currentX+" y="+currentY+" tx="+theX+" ty="+theY);
+		  	    //System.out.println("Dedans ! (x="+currentX+" y="+currentY+" tx="+theX+" ty="+theY+")");
 
 	            theg2.drawLine(oldX, oldY, currentX - theX , currentY - theY );
 
@@ -54,8 +56,9 @@ public class AWMotionBrush implements MouseMotionListener, MouseListener{
 
 			}else{
 				//hors de l'image
-				System.out.println("Dehors ! (x="+currentX+" y="+currentY+" tx="+theX+" ty="+theY);
-
+				//System.out.println("Dehors ! (x="+currentX+" y="+currentY+" tx="+theX+" ty="+theY+")");
+				oldX = e.getX();
+				oldY = e.getY();
 			}
 		  }
 
@@ -65,17 +68,17 @@ public class AWMotionBrush implements MouseMotionListener, MouseListener{
 
       }
 	  
-	@Override
+
 	public void mouseMoved(MouseEvent e) {
 		if (SwingUtilities.isLeftMouseButton(e)){
-		  
+			System.out.println("moved");
 			oldX = e.getX();
 			oldY = e.getY();
 	    }
 		  
 	}  
 
-	@Override
+
     public void mousePressed(MouseEvent e) {
 
     	if (SwingUtilities.isLeftMouseButton(e)){
@@ -86,25 +89,30 @@ public class AWMotionBrush implements MouseMotionListener, MouseListener{
     	}
 
     }
-	@Override
+
 	public void mouseEntered(MouseEvent e){
 		
 	}
-	@Override
+	
     public void mouseExited(MouseEvent e){
 		
 	}
-	@Override
+	
   
 	public void mouseReleased(MouseEvent e){
+    	
+		System.out.println("released");
+	    // save coord x,y when mouse is pressed
+	    oldX = e.getX();
+	    oldY = e.getY();
 
 
 	}
 	
 
-	@Override
+	
     public void mouseClicked(MouseEvent e){
-		
+		System.out.println("clicked");
 	}
 	  
 
