@@ -31,8 +31,8 @@ public class AWMotionBrush implements MouseMotionListener, MouseListener{
         currentX = e.getX();
         currentY = e.getY();
 		
-		oldX = e.getX() - theX;
-		oldY = e.getY() - theY;
+		oldX = e.getX();
+		oldY = e.getY();
 
 		theX = theawpaint.getDragX();
 		theY = theawpaint.getDragY();
@@ -45,7 +45,7 @@ public class AWMotionBrush implements MouseMotionListener, MouseListener{
 		  	    //dans l'image
 		  	    //System.out.println("Dedans ! (x="+currentX+" y="+currentY+" tx="+theX+" ty="+theY+")");
 
-	            theg2.drawLine(oldX, oldY, currentX - theX , currentY - theY );
+	            theg2.drawLine(oldX - theX, oldY - theY, currentX - theX , currentY - theY );
 
 
 			    //new AWBrush(currentX -theX, currentY - theY);
