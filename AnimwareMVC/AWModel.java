@@ -1,3 +1,5 @@
+
+
 import javax.swing.JFrame;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
@@ -58,10 +60,9 @@ public class AWModel  {
 		menu_1.add(Item_1_3);
 		AWSaver awsaver = new AWSaver();
 		Item_1_3.addActionListener(awsaver);
-		AWExport awexport = new AWExport();
+		AWExport awexport = new AWExport(painter);
 		menu_1.add(Item_1_4);
 		Item_1_4.addActionListener(awexport);
-		
 		menuBar.add(menu_1);
 		menuBar.add(menu_2);
 		menuBar.add(menu_3);
@@ -69,7 +70,7 @@ public class AWModel  {
 		//AWPaint painter = new AWPaint();
 		//
 		for (int i =  0 ; i < 100 ; i++) {  
-    	painter[i] = new AWPaint();
+    		painter[i] = new AWPaint();
 		}
 
 		//Implementation de la timeline !!

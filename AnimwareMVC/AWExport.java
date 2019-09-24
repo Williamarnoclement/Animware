@@ -16,28 +16,33 @@ import java.awt.image.BufferedImage;
 public class AWExport implements ActionListener {
 	
 	
-    public BufferedImage img = new BufferedImage(960, 540, BufferedImage.TYPE_INT_ARGB);
-	
-	public AWExport() {
+    
+    private AWPaint[] thepainter;
 
-	
+	public AWExport(AWPaint[] my_painter) {
+		thepainter = my_painter;
 	}	
 	
 	public void actionPerformed(ActionEvent e) {
-        saver(1);
+        
+
+        	saver();
+
     }
 
 	
-  public void saver(int wac) {
+  public void saver() {
 	
 	
-    File file = new File("rendered/" + wac + ".png");
     
+    for (int increment = 0; increment < 100 ;increment++ ) {
+    	
+    	File file = new File("rendered/" + increment + ".png");
 	
 		try {		
 		  
-		  ImageIO.write(img, "png", file);
-		  System.out.println(wac);
+		  ImageIO.write(thepainter[increment].img, "png", file);
+		  System.out.println(increment);
 		  
 		}
 		catch(IOException e) {
@@ -47,7 +52,7 @@ public class AWExport implements ActionListener {
 		  	System.out.println("npe");
 		}
 
-	return;
+	}
   }
 }
  
