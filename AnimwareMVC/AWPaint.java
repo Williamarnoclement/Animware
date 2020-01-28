@@ -20,6 +20,10 @@ import java.io.IOException;
  
 import javax.imageio.ImageIO;
 import javax.swing.SwingUtilities;
+
+//Pour le tracer (stroke)
+import java.awt.Stroke;
+import java.awt.BasicStroke;
  
 /**
 *
@@ -88,6 +92,10 @@ public class AWPaint extends JComponent {
  
   public void black() {
     g2.setPaint(Color.black);
+
+    Stroke stroke = new BasicStroke(10.0f);
+
+    g2.setStroke(stroke);
   }
  
   public void magenta() {

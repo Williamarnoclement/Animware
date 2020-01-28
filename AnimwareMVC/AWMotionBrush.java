@@ -47,6 +47,8 @@ public class AWMotionBrush implements MouseMotionListener, MouseListener{
 
 	            theg2.drawLine(oldX - theX, oldY - theY, currentX - theX , currentY - theY );
 
+	            theg2.fillOval(currentX - theX, currentY - theY , 5,5);
+
 
 			    //new AWBrush(currentX -theX, currentY - theY);
 			    oldX = currentX - theX;

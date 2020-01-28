@@ -17,15 +17,18 @@ public class AWModel  {
 	
 	JMenuBar menuBar = new JMenuBar();
     JMenu menu_1 = new JMenu("Fichier");
-    JMenu menu_2 = new JMenu("Couleurs");
+    JMenu menu_2 = new JMenu("Pinceau");
     JMenu menu_3 = new JMenu("Aide");
   
 	JMenuItem Item_1_1 = new JMenuItem("Nouveau");
 	JMenuItem Item_1_2 = new JMenuItem("Reinitialiser");
 	JMenuItem Item_1_3 = new JMenuItem("Sauvegarder");
 	JMenuItem Item_1_4 = new JMenuItem("Exporter");
+
+	JMenuItem Item_2_1 = new JMenuItem("Couleur");
    
-   
+	JMenuItem Item_3_1 = new JMenuItem("A propos");
+
     ButtonGroup couleurs = new ButtonGroup();
 
 
@@ -33,9 +36,9 @@ public class AWModel  {
 	public Container content;
 	
    
-    JRadioButton couleur_1 = new JRadioButton("Noir");
-    JRadioButton couleur_2 = new JRadioButton("Bleu");
-    JRadioButton couleur_3 = new JRadioButton("Vert");
+    // JRadioButton couleur_1 = new JRadioButton("Noir");
+    // JRadioButton couleur_2 = new JRadioButton("Bleu");
+    // JRadioButton couleur_3 = new JRadioButton("Vert");
 	
 	//timeline
 	JSlider timeline = new JSlider();
@@ -63,6 +66,18 @@ public class AWModel  {
 		AWExport awexport = new AWExport(painter);
 		menu_1.add(Item_1_4);
 		Item_1_4.addActionListener(awexport);
+				
+
+		menu_2.add(Item_2_1);
+		AWColors awcolors = new AWColors();
+		Item_2_1.addActionListener(awcolors);
+
+
+		menu_3.add(Item_3_1);
+		AWHelp awhelp = new AWHelp();
+		Item_3_1.addActionListener(awhelp);
+
+
 		menuBar.add(menu_1);
 		menuBar.add(menu_2);
 		menuBar.add(menu_3);
