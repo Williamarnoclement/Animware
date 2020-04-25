@@ -8,5 +8,3 @@ Animware signify Animation Software. This is my first solo project written in jA
 
 Contact me on my email >> 
 wiyam[at]icloud[dot]com
-
-More informations soon on WWW.ANIMWARE.COM
