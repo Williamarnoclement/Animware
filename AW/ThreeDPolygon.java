@@ -38,11 +38,11 @@ public class ThreeDPolygon{
 
   public void print2DPolygon(){
     Polygon poly = new Polygon();
-    System.out.println("-----");
+    //System.out.println("-----");
     for (int i = 0;i < this.points.length ; i++) {
       Point p = new PointConverter().convertPoint(this.points[i]);
       poly.addPoint(p.x, p.y);
-      System.out.println("{ "+p.x+" , "+p.y+" }");
+      //System.out.println("{ "+p.x+" , "+p.y+" }");
     }
   }
 

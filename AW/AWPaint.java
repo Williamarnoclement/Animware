@@ -169,21 +169,6 @@ public class AWPaint extends JComponent {
 
   @Override
   protected void paintComponent(Graphics g) {
-    if (image == null) {
-      // image to draw null ==> we create
-      image = createImage(960, 540);
-	  image.getScaledInstance(960/2, 540/2, Image.SCALE_DEFAULT);
-      g2 = (Graphics2D) image.getGraphics();
-      // enable antialiasing
-      g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-      // clear draw area
-	  clear();
-	  //addMouseListener(new AWBrush(getDragX(), getDragY()));
-	  addMouseMotionListener(new AWMotionBrush(g2, getDragX(), getDragY(), this));
-    }
-
-    //Graphics carrePinceau = g.create();
-
     /*rotation 3D points*/
     for (int i = 0; i < square.length; i++) {
       this.Rotate_polygon(square[i], paintID);
@@ -192,23 +177,37 @@ public class AWPaint extends JComponent {
     /*Affichage*/
     /*Reset display*/
     g.setColor(Color.WHITE);
-    g.fillRect(0,0,this.WIDTH, this.HEIGHT);
+    //g.fillRect(0,0,this.WIDTH, this.HEIGHT);
 
     square = Get3DPolygonLayers(square);
 
+    if (image == null) {
+      // image to draw null ==> we create
+      image = createImage(960, 540);
+  	  image.getScaledInstance(960/2, 540/2, Image.SCALE_DEFAULT);
+      g2 = (Graphics2D) image.getGraphics();
+        // enable antialiasing
+      g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+      // clear draw area
+  	  //addMouseListener(new AWBrush(getDragX(), getDragY()));
+  	  addMouseMotionListener(new AWMotionBrush(g2, getDragX(), getDragY(), this));
+      for (int i = 0; i < square.length; i++) {
+        if (i == 0) g2.setColor(Color.RED);
+        if (i == 1) g2.setColor(Color.BLUE);
+        if (i == 2) g2.setColor(Color.PINK);
+        if (i == 3) g2.setColor(Color.YELLOW);
+        if (i == 4) g2.setColor(Color.CYAN);
+        if (i == 5) g2.setColor(Color.GREEN);
+        g2.fillPolygon(this.square[i].get2DPolygon(this.position_x, this.old_position_y));
+      }
+    }
+
     g.setColor(Color.RED);
     g.drawImage(image,this.position_x, this.position_y,null);
+
+
     img = (BufferedImage) image;
 
-    for (int i = 0; i < square.length; i++) {
-      if (i == 0) g.setColor(Color.RED);
-      if (i == 1) g.setColor(Color.BLUE);
-      if (i == 2) g.setColor(Color.PINK);
-      if (i == 3) g.setColor(Color.YELLOW);
-      if (i == 4) g.setColor(Color.CYAN);
-      if (i == 5) g.setColor(Color.GREEN);
-      g.fillPolygon(this.square[i].get2DPolygon(this.position_x, this.old_position_y));
-    }
   }
 
   // now we create exposed methods
