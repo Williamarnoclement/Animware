@@ -63,6 +63,10 @@ public class AWPaint extends JComponent {
   ThreeDPoint[] _front = new ThreeDPoint[4];
   ThreeDPoint[] _back = new ThreeDPoint[4];
 
+
+  Color[] _colors = new Color[6];
+
+
   public AWPaint(int id) {
     this.paintID = id;
     this.position_x = 10;
@@ -73,38 +77,38 @@ public class AWPaint extends JComponent {
     addMouseMotionListener(wac_workspace);
     addMouseListener(wac_workspace);
 
-
     /**Polygone**/
+    int s = 100;
 
-    _left[0] = new ThreeDPoint(0, 0, 0);
-    _left[1] = new ThreeDPoint(100, 0, 0);
-    _left[2] = new ThreeDPoint(100, 100, 0);
-    _left[3] = new ThreeDPoint(0, 100, 0);
+    _left[0] = new ThreeDPoint(-s/2, -s/2, -s/2);
+    _left[1] = new ThreeDPoint(s/2,-s/2,-s/2);
+    _left[2] = new ThreeDPoint(s/2, s/2, -s/2);
+    _left[3] = new ThreeDPoint(-s/2, s/2, -s/2);
 
-    _right[0] = new ThreeDPoint(0, 0, 100);
-    _right[1] = new ThreeDPoint(100, 0, 100);
-    _right[2] = new ThreeDPoint(100, 100, 100);
-    _right[3] = new ThreeDPoint(0, 100, 100);
+    _right[0] = new ThreeDPoint(-s/2,-s/2, s/2);
+    _right[1] = new ThreeDPoint(s/2,-s/2, s/2);
+    _right[2] = new ThreeDPoint(s/2, s/2, s/2);
+    _right[3] = new ThreeDPoint(-s/2, s/2, s/2);
 
-    _top[0] = new ThreeDPoint(100,  0, 0);
-    _top[1] = new ThreeDPoint(100, 100, 0);
-    _top[2] = new ThreeDPoint(100, 100, 100);
-    _top[3] = new ThreeDPoint(100, 0, 100);
+    _top[0] = new ThreeDPoint(s/2, -s/2,-s/2);
+    _top[1] = new ThreeDPoint(s/2, s/2,-s/2);
+    _top[2] = new ThreeDPoint(s/2, s/2, s/2);
+    _top[3] = new ThreeDPoint(s/2,-s/2, s/2);
 
-    _bottom[0] = new ThreeDPoint(0, 0, 0);
-    _bottom[1] = new ThreeDPoint(0, 100, 0);
-    _bottom[2] = new ThreeDPoint(0, 100, 100);
-    _bottom[3] = new ThreeDPoint(0, 0, 100);
+    _bottom[0] = new ThreeDPoint(-s/2,-s/2,-s/2);
+    _bottom[1] = new ThreeDPoint(-s/2, s/2,-s/2);
+    _bottom[2] = new ThreeDPoint(-s/2, s/2, s/2);
+    _bottom[3] = new ThreeDPoint(-s/2,-s/2, s/2);
 
-    _front[0] = new ThreeDPoint(0, 100, 100);
-    _front[1] = new ThreeDPoint(100, 100, 100);
-    _front[2] = new ThreeDPoint(100, 100, 0);
-    _front[3] = new ThreeDPoint(0, 100, 0);
+    _front[0] = new ThreeDPoint(-s/2, s/2, s/2);
+    _front[1] = new ThreeDPoint(s/2, s/2, s/2);
+    _front[2] = new ThreeDPoint(s/2, s/2,-s/2);
+    _front[3] = new ThreeDPoint(-s/2, s/2,-s/2);
 
-    _back[0] = new ThreeDPoint(0, 100, 100);
-    _back[1] = new ThreeDPoint(100, 100, 100);
-    _back[2] = new ThreeDPoint(100, 100, 0);
-    _back[3] = new ThreeDPoint(0, 100, 0);
+    _back[0] = new ThreeDPoint(-s/2, s/2, s/2);
+    _back[1] = new ThreeDPoint(s/2, s/2, s/2);
+    _back[2] = new ThreeDPoint(s/2, s/2,-s/2);
+    _back[3] = new ThreeDPoint(-s/2, s/2,-s/2);
 
     this.square[0] = new ThreeDPolygon(_top);
     this.square[1]  = new ThreeDPolygon(_left);
@@ -112,6 +116,14 @@ public class AWPaint extends JComponent {
     this.square[3]  = new ThreeDPolygon(_bottom);
     this.square[4]  = new ThreeDPolygon(_back);
     this.square[5]  = new ThreeDPolygon(_front);
+
+    //defining colors of each face:
+    _colors[0] = Color.RED;
+    _colors[1] = Color.BLUE;
+    _colors[2] = Color.PINK;
+    _colors[3] = Color.YELLOW;
+    _colors[4] = Color.CYAN;
+    _colors[5] = Color.GREEN;
   }
 
   public ThreeDPolygon Rotate_polygon(ThreeDPolygon poly, double timeline){
@@ -153,6 +165,13 @@ public class AWPaint extends JComponent {
     return l;
   }
 
+  public Color[] permutate_colors(Color[] l, int a, int b){
+    Color tmp = l[a];
+    l[a] = l[b];
+    l[b] = tmp;
+    return l;
+  }
+
   public ThreeDPolygon[] Get3DPolygonLayers(ThreeDPolygon[] layer_list){
     for (int i = 0; i < layer_list.length; i++) {
         for (int j = i+1; j < layer_list.length; j++) {
@@ -160,11 +179,13 @@ public class AWPaint extends JComponent {
           current = GetClosest_polygon(layer_list[i], layer_list[j]);
           if (current == layer_list[i]) {
             layer_list = permutate_in_array(layer_list, i,j);
+            this._colors = permutate_colors(_colors, i,j);
           }
         }
     }
     return layer_list;
   }
+
 
 
   @Override
@@ -192,12 +213,7 @@ public class AWPaint extends JComponent {
   	  //addMouseListener(new AWBrush(getDragX(), getDragY()));
   	  addMouseMotionListener(new AWMotionBrush(g2, getDragX(), getDragY(), this));
       for (int i = 0; i < square.length; i++) {
-        if (i == 0) g2.setColor(Color.RED);
-        if (i == 1) g2.setColor(Color.BLUE);
-        if (i == 2) g2.setColor(Color.PINK);
-        if (i == 3) g2.setColor(Color.YELLOW);
-        if (i == 4) g2.setColor(Color.CYAN);
-        if (i == 5) g2.setColor(Color.GREEN);
+        g2.setColor(_colors[i]);
         g2.fillPolygon(this.square[i].get2DPolygon(this.position_x, this.old_position_y));
       }
     }
