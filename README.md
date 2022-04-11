@@ -11,6 +11,6 @@ wiyam[at]icloud[dot]com
 
 To do list:
 
-- lighting
 - import and export JSON 3d objects
 - very simple rigging and skeletal animation system
+- lighting
