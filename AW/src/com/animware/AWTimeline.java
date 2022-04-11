@@ -10,28 +10,28 @@ import java.awt.event.MouseListener;
 import javax.swing.event.*;
 
 import javax.swing.JSlider;
- 
+
 
 public class AWTimeline implements ChangeListener {
 
 
 	private AWModel current_model;
 
-	public AWTimeline(AWModel awmodel) 
+	public AWTimeline(AWModel awmodel)
 	{
 		current_model = awmodel;
-	}	
+	}
 
-	
 
-    public void stateChanged(ChangeEvent ce) 
-    {	
+
+    public void stateChanged(ChangeEvent ce)
+    {
     	System.out.println("Timeline fonctionnelle" + ((JSlider) ce.getSource()).getValue());
 
-    		//my_content.remove(awpaint);		
+    		//my_content.remove(awpaint);
 			//newFrame = ((JSlider) ce.getSource()).getValue();
             //System.out.println("Frame actuelle : " + ((JSlider) ce.getSource()).getValue());
-						
+
 			/**my_content.add(awpaint[newFrame]);
 			currentFrame = newFrame;
 			my_content.revalidate();
@@ -43,4 +43,3 @@ public class AWTimeline implements ChangeListener {
 			current_model.AWSwitchFrame(wac_timeline_value);
     }
 }
- 

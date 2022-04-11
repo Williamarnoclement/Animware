@@ -52,17 +52,26 @@ public class AWPaint extends JComponent {
   private int position_x, position_y;
   private int old_position_x, old_position_y;
 
+  // /**Polygone**/
+  // ThreeDPolygon[] square = new ThreeDPolygon[6];
+  //
+  // /*Creation du polygone*/
+  // ThreeDPoint[] _left = new ThreeDPoint[4];
+  // ThreeDPoint[] _right = new ThreeDPoint[4];
+  // ThreeDPoint[] _top = new ThreeDPoint[4];
+  // ThreeDPoint[] _bottom = new ThreeDPoint[4];
+  // ThreeDPoint[] _front = new ThreeDPoint[4];
+  // ThreeDPoint[] _back = new ThreeDPoint[4];
   /**Polygone**/
-  ThreeDPolygon[] square = new ThreeDPolygon[6];
+  ThreeDPolygon[] square;
 
   /*Creation du polygone*/
-  ThreeDPoint[] _left = new ThreeDPoint[4];
-  ThreeDPoint[] _right = new ThreeDPoint[4];
-  ThreeDPoint[] _top = new ThreeDPoint[4];
-  ThreeDPoint[] _bottom = new ThreeDPoint[4];
-  ThreeDPoint[] _front = new ThreeDPoint[4];
-  ThreeDPoint[] _back = new ThreeDPoint[4];
-
+  ThreeDPoint[] _left;
+  ThreeDPoint[] _right;
+  ThreeDPoint[] _top;
+  ThreeDPoint[] _bottom;
+  ThreeDPoint[] _front;
+  ThreeDPoint[] _back;
 
   Color[] _colors = new Color[6];
 
@@ -77,45 +86,45 @@ public class AWPaint extends JComponent {
     addMouseMotionListener(wac_workspace);
     addMouseListener(wac_workspace);
 
-    /**Polygone**/
-    int s = 100;
-
-    _left[0] = new ThreeDPoint(-s/2, -s/2, -s/2);
-    _left[1] = new ThreeDPoint(s/2,-s/2,-s/2);
-    _left[2] = new ThreeDPoint(s/2, s/2, -s/2);
-    _left[3] = new ThreeDPoint(-s/2, s/2, -s/2);
-
-    _right[0] = new ThreeDPoint(-s/2,-s/2, s/2);
-    _right[1] = new ThreeDPoint(s/2,-s/2, s/2);
-    _right[2] = new ThreeDPoint(s/2, s/2, s/2);
-    _right[3] = new ThreeDPoint(-s/2, s/2, s/2);
-
-    _top[0] = new ThreeDPoint(s/2, -s/2,-s/2);
-    _top[1] = new ThreeDPoint(s/2, s/2,-s/2);
-    _top[2] = new ThreeDPoint(s/2, s/2, s/2);
-    _top[3] = new ThreeDPoint(s/2,-s/2, s/2);
-
-    _bottom[0] = new ThreeDPoint(-s/2,-s/2,-s/2);
-    _bottom[1] = new ThreeDPoint(-s/2, s/2,-s/2);
-    _bottom[2] = new ThreeDPoint(-s/2, s/2, s/2);
-    _bottom[3] = new ThreeDPoint(-s/2,-s/2, s/2);
-
-    _front[0] = new ThreeDPoint(-s/2, s/2, s/2);
-    _front[1] = new ThreeDPoint(s/2, s/2, s/2);
-    _front[2] = new ThreeDPoint(s/2, s/2,-s/2);
-    _front[3] = new ThreeDPoint(-s/2, s/2,-s/2);
-
-    _back[0] = new ThreeDPoint(-s/2, s/2, s/2);
-    _back[1] = new ThreeDPoint(s/2, s/2, s/2);
-    _back[2] = new ThreeDPoint(s/2, s/2,-s/2);
-    _back[3] = new ThreeDPoint(-s/2, s/2,-s/2);
-
-    this.square[0] = new ThreeDPolygon(_top);
-    this.square[1]  = new ThreeDPolygon(_left);
-    this.square[2]  = new ThreeDPolygon(_right);
-    this.square[3]  = new ThreeDPolygon(_bottom);
-    this.square[4]  = new ThreeDPolygon(_back);
-    this.square[5]  = new ThreeDPolygon(_front);
+    // /**Polygone**/
+    // int s = 100;
+    //
+    // _left[0] = new ThreeDPoint(-s/2, -s/2, -s/2);
+    // _left[1] = new ThreeDPoint(s/2,-s/2,-s/2);
+    // _left[2] = new ThreeDPoint(s/2, s/2, -s/2);
+    // _left[3] = new ThreeDPoint(-s/2, s/2, -s/2);
+    //
+    // _right[0] = new ThreeDPoint(-s/2,-s/2, s/2);
+    // _right[1] = new ThreeDPoint(s/2,-s/2, s/2);
+    // _right[2] = new ThreeDPoint(s/2, s/2, s/2);
+    // _right[3] = new ThreeDPoint(-s/2, s/2, s/2);
+    //
+    // _top[0] = new ThreeDPoint(s/2, -s/2,-s/2);
+    // _top[1] = new ThreeDPoint(s/2, s/2,-s/2);
+    // _top[2] = new ThreeDPoint(s/2, s/2, s/2);
+    // _top[3] = new ThreeDPoint(s/2,-s/2, s/2);
+    //
+    // _bottom[0] = new ThreeDPoint(-s/2,-s/2,-s/2);
+    // _bottom[1] = new ThreeDPoint(-s/2, s/2,-s/2);
+    // _bottom[2] = new ThreeDPoint(-s/2, s/2, s/2);
+    // _bottom[3] = new ThreeDPoint(-s/2,-s/2, s/2);
+    //
+    // _front[0] = new ThreeDPoint(-s/2, s/2, s/2);
+    // _front[1] = new ThreeDPoint(s/2, s/2, s/2);
+    // _front[2] = new ThreeDPoint(s/2, s/2,-s/2);
+    // _front[3] = new ThreeDPoint(-s/2, s/2,-s/2);
+    //
+    // _back[0] = new ThreeDPoint(-s/2, s/2, s/2);
+    // _back[1] = new ThreeDPoint(s/2, s/2, s/2);
+    // _back[2] = new ThreeDPoint(s/2, s/2,-s/2);
+    // _back[3] = new ThreeDPoint(-s/2, s/2,-s/2);
+    //
+    // this.square[0] = new ThreeDPolygon(_top);
+    // this.square[1]  = new ThreeDPolygon(_left);
+    // this.square[2]  = new ThreeDPolygon(_right);
+    // this.square[3]  = new ThreeDPolygon(_bottom);
+    // this.square[4]  = new ThreeDPolygon(_back);
+    // this.square[5]  = new ThreeDPolygon(_front);
 
     //defining colors of each face:
     _colors[0] = Color.RED;
@@ -165,6 +174,10 @@ public class AWPaint extends JComponent {
     return l;
   }
 
+  public void import3DPolygon(ThreeDPolygon[] my_square){
+    this.square = my_square;
+  }
+
   public Color[] permutate_colors(Color[] l, int a, int b){
     Color tmp = l[a];
     l[a] = l[b];
@@ -191,16 +204,20 @@ public class AWPaint extends JComponent {
   @Override
   protected void paintComponent(Graphics g) {
     /*rotation 3D points*/
-    for (int i = 0; i < square.length; i++) {
-      this.Rotate_polygon(square[i], paintID);
+    if (this.square != null) {
+      for (int i = 0; i < square.length; i++) {
+        this.Rotate_polygon(square[i], paintID);
+      }
     }
 
     /*Affichage*/
     /*Reset display*/
     g.setColor(Color.WHITE);
     //g.fillRect(0,0,this.WIDTH, this.HEIGHT);
+    if (this.square != null) {
+      square = Get3DPolygonLayers(square);
+    }
 
-    square = Get3DPolygonLayers(square);
 
     if (image == null) {
       // image to draw null ==> we create
@@ -212,9 +229,11 @@ public class AWPaint extends JComponent {
       // clear draw area
   	  //addMouseListener(new AWBrush(getDragX(), getDragY()));
   	  addMouseMotionListener(new AWMotionBrush(g2, getDragX(), getDragY(), this));
-      for (int i = 0; i < square.length; i++) {
-        g2.setColor(_colors[i]);
-        g2.fillPolygon(this.square[i].get2DPolygon(this.position_x, this.old_position_y));
+      if (this.square != null) {
+        for (int i = 0; i < square.length; i++) {
+          g2.setColor(_colors[i]);
+          g2.fillPolygon(this.square[i].get2DPolygon(this.position_x, this.old_position_y));
+        }
       }
     }
 

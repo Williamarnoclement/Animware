@@ -12,6 +12,7 @@ run:
 	java -cp "./out" Main
 
 clear:
+	touch out/lol.class
 	rm out/*.class
 	rm -d out
 

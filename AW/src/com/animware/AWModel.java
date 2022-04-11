@@ -24,6 +24,7 @@ public class AWModel  {
 	JMenuItem Item_1_2 = new JMenuItem("Reinitialiser");
 	JMenuItem Item_1_3 = new JMenuItem("Sauvegarder");
 	JMenuItem Item_1_4 = new JMenuItem("Exporter");
+	JMenuItem Item_1_5 = new JMenuItem("Importer");
 
 	JMenuItem Item_2_1 = new JMenuItem("Couleur");
 
@@ -67,23 +68,24 @@ public class AWModel  {
 		menu_1.add(Item_1_4);
 		Item_1_4.addActionListener(awexport);
 
+		//Enable Polygon Importer
+		AWPolyImporter awpolyimporter = new AWPolyImporter(this);
+		menu_1.add(Item_1_5);
+		Item_1_5.addActionListener(awpolyimporter);
 
 		menu_2.add(Item_2_1);
 		AWColors awcolors = new AWColors();
 		Item_2_1.addActionListener(awcolors);
 
-
 		menu_3.add(Item_3_1);
 		AWHelp awhelp = new AWHelp();
 		Item_3_1.addActionListener(awhelp);
-
 
 		menuBar.add(menu_1);
 		menuBar.add(menu_2);
 		menuBar.add(menu_3);
 
 		//AWPaint painter = new AWPaint();
-		//
 		for (int i =  0 ; i < 100 ; i++) {
     		painter[i] = new AWPaint(i);
 		}
@@ -91,11 +93,9 @@ public class AWModel  {
 		//Implementation de la timeline !!
 		AWTimeline wac_timeline = new AWTimeline(this);
 
-
 		timeline.addChangeListener(wac_timeline);
 
 		content.add(painter[currentFrame], BorderLayout.CENTER);
-
 
 		//timeline creation
 		timeline.setMaximum(100 - 1);
@@ -119,13 +119,9 @@ public class AWModel  {
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		// rendre le tout visible
 		frame.setVisible(true);
-
-
-
 	}
 
 	public void AWSwitchFrame(int mynewframe){
-
 			content.remove(painter[currentFrame]);
 			newFrame = mynewframe;
             System.out.println("Frame actuelle : " + newFrame);
@@ -135,6 +131,13 @@ public class AWModel  {
 			currentFrame = newFrame;
 			content.revalidate();
 			content.repaint();
+	}
 
+	public void reImport(ThreeDPolygon[] p){
+		for (int i = 0; i< 100 ; i++) {
+			painter[i].import3DPolygon(p);
+		}
+		content.revalidate();
+		content.repaint();
 	}
  }
