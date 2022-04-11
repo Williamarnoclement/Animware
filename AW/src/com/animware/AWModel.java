@@ -87,7 +87,7 @@ public class AWModel  {
 
 		//AWPaint painter = new AWPaint();
 		for (int i =  0 ; i < 100 ; i++) {
-    		painter[i] = new AWPaint(i);
+    		painter[i] = new AWPaint(i, this);
 		}
 
 		//Implementation de la timeline !!
@@ -119,14 +119,15 @@ public class AWModel  {
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		// rendre le tout visible
 		frame.setVisible(true);
+		rethink();
 	}
 
 	public void AWSwitchFrame(int mynewframe){
 			content.remove(painter[currentFrame]);
 			newFrame = mynewframe;
             System.out.println("Frame actuelle : " + newFrame);
-			painter[newFrame].setDragX(painter[currentFrame].getDragX());
-			painter[newFrame].setDragY(painter[currentFrame].getDragY());
+			// painter[newFrame].setDragX(painter[currentFrame].getDragX());
+			// painter[newFrame].setDragY(painter[currentFrame].getDragY());
 			content.add(painter[newFrame]);
 			currentFrame = newFrame;
 			content.revalidate();
@@ -136,8 +137,17 @@ public class AWModel  {
 	public void reImport(ThreeDPolygon[] p){
 		for (int i = 0; i< 100 ; i++) {
 			painter[i].import3DPolygon(p);
+			AWSwitchFrame(i);
 		}
-		content.revalidate();
-		content.repaint();
+		rethink();
+	}
+
+	public void rethink(){
+		int x = painter[currentFrame].getDragX();
+		int y = painter[currentFrame].getDragY();
+		for (int i = 0; i< 100 ; i++) {
+			painter[i].setAWP(x,y);
+			painter[i].setOldAWP(x,y);
+		}
 	}
  }

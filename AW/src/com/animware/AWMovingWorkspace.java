@@ -15,9 +15,12 @@ public class AWMovingWorkspace implements MouseListener, MouseMotionListener {
 
   private int oldMouseX, oldMouseY;
 
-  public AWMovingWorkspace(AWPaint awpainter) {
+  private AWModel model;
 
-    current_painter = awpainter;
+  public AWMovingWorkspace(AWPaint awpainter, AWModel awmodel) {
+
+    this.current_painter = awpainter;
+    this.model = awmodel;
 
     this.current_painter.setOldAWP(this.current_painter.getAWP()[0], this.current_painter.getAWP()[1]);
 
@@ -46,6 +49,7 @@ public class AWMovingWorkspace implements MouseListener, MouseMotionListener {
     if (SwingUtilities.isMiddleMouseButton(e)){
       this.current_painter.setAWP(this.current_painter.getoldAWP()[0] + e.getX()- this.oldMouseX ,this.current_painter.getoldAWP()[1]  +  e.getY()- this.oldMouseY);
       this.current_painter.repaint();
+      this.model.rethink();
     }
   }
   /**

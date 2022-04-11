@@ -45,9 +45,11 @@ public class AWPaint extends JComponent {
   public static int WIDTH = 960;
   public  static int HEIGHT = 540;
 
+  private AWModel model;
+
 	//draggable system... oui je parle anglais !
 
-	public int currentX, currentY, oldX, oldY;
+	//public int currentX, currentY, oldX, oldY;
 
   private int position_x, position_y;
   private int old_position_x, old_position_y;
@@ -76,13 +78,14 @@ public class AWPaint extends JComponent {
   Color[] _colors = new Color[6];
 
 
-  public AWPaint(int id) {
+  public AWPaint(int id, AWModel my_model) {
     this.paintID = id;
-    this.position_x = 10;
-    this.position_y = 10;
+    this.position_x = 1;
+    this.position_y = 1;
+    this.model = my_model;
 
     //implementation du movingworkspace !
-    AWMovingWorkspace wac_workspace = new AWMovingWorkspace(this);
+    AWMovingWorkspace wac_workspace = new AWMovingWorkspace(this, this.model);
     addMouseMotionListener(wac_workspace);
     addMouseListener(wac_workspace);
 
