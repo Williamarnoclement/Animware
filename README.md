@@ -15,7 +15,17 @@ Actually, the viewport and the camera are the same entity. But I'm working on a 
 In a near future, I want to integrate a very simple rigging and skeletal animation system. It would be amazing !
 Animware means Animation Software.
 
-Contact me on my email >>
+# Follow the development
+
+You can discover the work behind this project on Trello:
+https://trello.com/b/aklD2zHj
+
+# Who made this
+
+The only one dev of Animware is William-Arno CLEMENT. Say me hello on LinkedIn  !
+https://www.linkedin.com/in/williamarnoclement/
+
+# Contact the dev
 
 wiyam[at]icloud[dot]com
 AND/OR
