@@ -15,11 +15,11 @@ The V1 will remain available to show my evolution during time !
 
 # What's next ?
 
-##currently on V2
+## currently on V2
 
 Remake the software with a cleaner architecture with the OpenGL APIs with the exact same features that I implemented in V1.
 
-##Ideas from V1 (deprecated)
+## Ideas from V1 (deprecated)
 
 Actually a cube is integrated into the code. That's why i'm working on import and export module for JSON 3d objects.
 I absolutly need to implement a lighting module.
