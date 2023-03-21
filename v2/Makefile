@@ -12,9 +12,8 @@ run:
 	java -cp "./src/com/griffure/lib/jogl-all.jar:./src/com/griffure/lib/gluegen-rt.jar:./out:." Main
 
 clear:
-	touch out/lol.class
-	rm out/*.class
-	rm -d out
+	$(RM) -f out/*.class
+	$(RM) -d out
 
 clean:
 	clear
