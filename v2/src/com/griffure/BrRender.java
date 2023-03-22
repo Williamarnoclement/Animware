@@ -1,10 +1,3 @@
-/**import javax.media.opengl.GL2;
-import javax.media.opengl.GLAutoDrawable;
-import javax.media.opengl.GLCapabilities;
-import javax.media.opengl.GLEventListener;
-import javax.media.opengl.GLProfile;
-import javax.media.opengl.awt.GLCanvas;
-**/
 import com.jogamp.opengl.GL2;
 import com.jogamp.opengl.GLAutoDrawable;
 import com.jogamp.opengl.GLCapabilities;
@@ -18,7 +11,6 @@ import javax.swing.JFrame;
  * This file is running the 3D renderer with OpenGL API
  * @author William-Arno CLEMENT
  */
-
 
 public class BrRender implements GLEventListener {
 

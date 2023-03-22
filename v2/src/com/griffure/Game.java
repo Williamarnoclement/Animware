@@ -7,6 +7,9 @@ import javax.swing.ButtonGroup;
 import javax.swing.JSlider;
 
 import javax.swing.event.*;
+import java.awt.*;
+import java.awt.event.*;
+import javax.swing.*;
 
 /**
  * This class is instantiating the client
@@ -31,11 +34,19 @@ public class Game  {
 	JMenuItem Item_3_1 = new JMenuItem("A propos");
     
     private JFrame gameframe;
+    
+    private Gameplay gameplay;
+    
+    private Action upAction;
+	private Action downAction;
+	private Action leftAction;
+	private Action rightAction;
 
 	public Game() {
-
 		// Window settings
         this.gameframe = new JFrame("Backrun Engine");
+        this.gameframe.setFocusable(true);
+        this.gameframe.requestFocus();
 
 		menu_1.add(Item_1_1);
 		//Item_1_1.addActionListener(actionListener);
@@ -57,15 +68,87 @@ public class Game  {
 		this.gameframe.setJMenuBar(menuBar);
         
         //Instantiate and display the 3D part of the game
-        BrRender render = new BrRender(this.gameframe); 
-
+        BrRender render = new BrRender(this.gameframe);
+        
+        //Instantiate gameplay and  interactions
+        gameplay = new Gameplay();
+        
+        upAction = new UpAction(this.gameplay);
+		downAction = new DownAction(this.gameplay);
+		leftAction = new LeftAction(this.gameplay);
+		rightAction = new RightAction(this.gameplay);
+        
+        JRootPane rootPane = this.gameframe.getRootPane();
+        
+        rootPane.getInputMap(rootPane.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke('z'), "upAction");
+		rootPane.getActionMap().put("upAction", upAction);
+		rootPane.getInputMap(rootPane.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke('s'), "downAction");
+		rootPane.getActionMap().put("downAction", downAction);
+		rootPane.getInputMap(rootPane.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke('q'), "leftAction");
+		rootPane.getActionMap().put("leftAction", leftAction);
+		rootPane.getInputMap(rootPane.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke('d'), "rightAction");
+		rootPane.getActionMap().put("rightAction", rightAction);
 
 		/** End of file, display windows and enable close*/
-
+        // rendre le tout visible
+		this.gameframe.setVisible(true);
+        this.gameframe.toFront();
+        this.gameframe.requestFocus();
 		this.gameframe.setSize(960, 540 + 50);
 		// fermeture de la JFrame
 		this.gameframe.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		// rendre le tout visible
-		this.gameframe.setVisible(true);
 	}
+    
+    public class UpAction extends AbstractAction{
+        private Gameplay gameplay;
+        
+        UpAction(Gameplay gp){
+            this.gameplay = gp;
+        }
+
+		@Override
+		public void actionPerformed(ActionEvent e) {
+            this.gameplay.set_f(true);
+		}		
+	}
+    
+	public class DownAction extends AbstractAction{
+        private Gameplay gameplay;
+        
+        DownAction(Gameplay gp){
+            this.gameplay = gp;
+        }
+
+		@Override
+		public void actionPerformed(ActionEvent e) {
+            this.gameplay.set_b(true);
+		}		
+	}
+    
+	public class LeftAction extends AbstractAction{
+        private Gameplay gameplay;
+        
+        LeftAction(Gameplay gp){
+            this.gameplay = gp;
+        }
+
+		@Override
+		public void actionPerformed(ActionEvent e) {
+            this.gameplay.set_l(true);
+		}		
+	}
+    
+	public class RightAction extends AbstractAction{
+        private Gameplay gameplay;
+        
+        RightAction(Gameplay gp){
+            this.gameplay = gp;
+        }
+
+		@Override
+		public void actionPerformed(ActionEvent e) {
+            this.gameplay.set_r(true);
+		}		
+	}
+
 }
