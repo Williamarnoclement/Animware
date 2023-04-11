@@ -37,10 +37,15 @@ public class Game  {
     
     private Gameplay gameplay;
     
+    private Player player;
+    
     private Action upAction;
 	private Action downAction;
 	private Action leftAction;
 	private Action rightAction;
+    
+	private Action nextAction;
+	private Action resetAction;
 
 	public Game() {
 		// Window settings
@@ -64,30 +69,50 @@ public class Game  {
 		menuBar.add(menu_2);
 		menuBar.add(menu_3);
 
-        // put menu on the top of the window
+        //Put menu on the top of the window
 		this.gameframe.setJMenuBar(menuBar);
         
-        //Instantiate and display the 3D part of the game
-        BrRender render = new BrRender(this.gameframe);
-        
+        //Intanciate Player
+        player = new Player();
+                
         //Instantiate gameplay and  interactions
-        gameplay = new Gameplay();
+        gameplay = new Gameplay(player);
+        
+        //Instantiate and display the 3D part of the game
+        BrRender render = new BrRender(this.gameframe, this.gameplay, this.player);
         
         upAction = new UpAction(this.gameplay);
 		downAction = new DownAction(this.gameplay);
 		leftAction = new LeftAction(this.gameplay);
 		rightAction = new RightAction(this.gameplay);
         
+		nextAction = new NextAction(this.gameplay);
+		resetAction = new ResetAction(this.gameplay);
+        
+        
         JRootPane rootPane = this.gameframe.getRootPane();
+        
+        //Action Position
         
         rootPane.getInputMap(rootPane.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke('z'), "upAction");
 		rootPane.getActionMap().put("upAction", upAction);
+        
 		rootPane.getInputMap(rootPane.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke('s'), "downAction");
 		rootPane.getActionMap().put("downAction", downAction);
+        
 		rootPane.getInputMap(rootPane.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke('q'), "leftAction");
 		rootPane.getActionMap().put("leftAction", leftAction);
+        
 		rootPane.getInputMap(rootPane.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke('d'), "rightAction");
 		rootPane.getActionMap().put("rightAction", rightAction);
+        
+        //Action for Camera
+        
+        rootPane.getInputMap(rootPane.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke('n'), "nextAction");
+        rootPane.getActionMap().put("nextAction", nextAction);
+        
+        rootPane.getInputMap(rootPane.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke('b'), "resetAction");
+        rootPane.getActionMap().put("resetAction", resetAction);
 
 		/** End of file, display windows and enable close*/
         // rendre le tout visible
@@ -148,6 +173,32 @@ public class Game  {
 		@Override
 		public void actionPerformed(ActionEvent e) {
             this.gameplay.set_r(true);
+		}		
+	}
+    
+    public class NextAction extends AbstractAction{
+        private Gameplay gameplay;
+        
+        NextAction(Gameplay gp){
+            this.gameplay = gp;
+        }
+
+		@Override
+		public void actionPerformed(ActionEvent e) {
+            this.gameplay.set_right_dash(true);
+		}		
+	}
+    
+    public class ResetAction extends AbstractAction{
+        private Gameplay gameplay;
+        
+        ResetAction(Gameplay gp){
+            this.gameplay = gp;
+        }
+
+		@Override
+		public void actionPerformed(ActionEvent e) {
+            this.gameplay.set_left_dash(true);
 		}		
 	}
 
